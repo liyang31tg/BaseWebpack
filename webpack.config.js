@@ -1,10 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack');
 let build = require('./build');
 let config = {
-    mode: 'production',
+    mode: 'development',
     entry: build.entries,
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -28,16 +29,29 @@ let config = {
     },
     plugins: [
         new CleanWebpackPlugin(["dist"]),
+        new VueLoaderPlugin(),
         //热替换依赖 start
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin()
         //热替换依赖 end
     ],
+    resolveLoader: {
+            modules: [
+                path.resolve('node_modules'),
+            ]
+        },
+
     module: {
         rules: [
+           
+             {
+                 test: /\.js$/,
+                 loader: 'babel-loader'
+             },
             {
                 test: /\.css$/,
                 use: [
+                    'vue-style-loader',
                     'style-loader',
                     'css-loader'
                 ]
@@ -65,9 +79,19 @@ let config = {
                 use: [
                     'xml-loader'
                 ]
-            }
+            },
+             {
+                 test: /\.vue$/,
+                 loader:'vue-loader',
+                 options:{
+                     esModule: false//必须要
+                 }
+
+             },
+            
         ]
-    }
+    },
+
 };
 build.templates().map(p => {
     config.plugins.push(
