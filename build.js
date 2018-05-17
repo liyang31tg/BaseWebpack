@@ -1,6 +1,7 @@
 let App = require('./app.json');
 let path = require('path');
 
+
 let merge = function(a, b) {
     return {
         css: (a.css || []).concat(b.css || []),
@@ -31,3 +32,11 @@ exports.templates = function() {
 exports.externals = function() {
     return App.externals
 };
+
+const dist = "dist";
+exports.dist = dist;
+
+
+
+
+

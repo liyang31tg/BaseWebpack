@@ -1,19 +1,21 @@
 const path = require("path");
+let fs  = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 let build = require('./build');
 let config = {
     mode: 'development',
     entry: build.entries,
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, build.dist),
         filename: "publishStatic/[name].bundle.[hash:7].js"
     },
     devtool: 'inline-source-map',//只有在开发的时候使用
     devServer: {
-        contentBase: './dist',//根目录
+        contentBase: path.resolve(__dirname, build.dist),//根目录
         hot: true //热替换
     },
     optimization: {
@@ -28,12 +30,16 @@ let config = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(["dist"]),
+        new CleanWebpackPlugin([build.dist]),
         new VueLoaderPlugin(),
         //热替换依赖 start
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
         //热替换依赖 end
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname,"src","static"),
+            to: path.resolve(__dirname, build.dist,"static")
+        }])
     ],
     resolveLoader: {
             modules: [
