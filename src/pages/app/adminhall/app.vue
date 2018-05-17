@@ -1,24 +1,31 @@
 <template>
-    <div style="margin:0 auto">
-        qwe
+    <div style="margin:0 auto;column-rule: aliceblue;color: aqua">
+        LiYanssasdg:{{accountname}}
     </div>
 </template>
 
-<script type="text/javascript">
-    
-    let vm = {
-        data: function() {
+<style>
+    body{
+        font-size: 18px;
+    }
+    .cc{
+        font-family: "Andale Mono";
+    }
+</style>
+
+<script>
+    import print from '../../../../src/print';
+    print()
+    console.log("dddd");
+    export default {
+        data() {
             return {
-               
-                accountname:""
-
-
+                accountname:"liyang"
             }
         },
-        
+        created(){
+            console.log("asdasdfafsad")
+        }
+    };
 
-    }
-
-
-    export default vm
 </script>

@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 let build = require('./build');
 let config = {
@@ -98,5 +98,13 @@ build.templates().map(p => {
         new HtmlWebpackPlugin(p)
     )
 });
+/*
+*  {
+        "vue": "Vue",
+        "vue-router": "VueRouter"
+    }
+    将一些资源用cdn引入，而不是一味全部用webpack打包引入，'vue'是资源名，'Vue'对应引入的全局变量
+* */
+config.externals = build.externals();
 
 module.exports = config;
