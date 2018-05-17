@@ -4,6 +4,7 @@
     </div>
 </template>
 
+<!--MARK:这里不能写样式类型-->
 <style>
     body{
         font-size: 18px;
@@ -12,9 +13,9 @@
         font-family: "Andale Mono";
     }
 </style>
-
+<!--MARK:这里不能写样式类型-->
 <script>
-    import print from '../../../../src/print';
+    import print from '../../../print';
     print()
     console.log("dddd");
     export default {

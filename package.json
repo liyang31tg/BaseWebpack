@@ -2,12 +2,13 @@
   "name": "testwebpack",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/vue.runtime.common.js",
+  "main": "webpack",
   "dependencies": {
     "babel-preset-env": "^1.7.0"
   },
   "devDependencies": {
     "babel-loader": "^7.1.4",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
