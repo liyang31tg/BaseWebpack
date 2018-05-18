@@ -10,12 +10,12 @@ let config = {
     mode: 'development',
     entry: build.entries,
     output: {
-        path: path.resolve(__dirname, build.dist),
+        path: path.resolve(__dirname,"..", build.dist),
         filename: "publishStatic/[name].bundle.[hash:7].js"
     },
     devtool: 'inline-source-map',//只有在开发的时候使用
     devServer: {
-        contentBase: path.resolve(__dirname, build.dist),//根目录
+        contentBase: path.resolve(__dirname,"..", build.dist),//根目录
         hot: true //热替换
     },
     optimization: {
@@ -30,7 +30,7 @@ let config = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin([build.dist]),
+        new CleanWebpackPlugin([path.resolve("..",build.dist)]),
         new VueLoaderPlugin(),
         //热替换依赖 start
         new webpack.NamedModulesPlugin(),
@@ -38,7 +38,7 @@ let config = {
         //热替换依赖 end
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname,"src","static"),
-            to: path.resolve(__dirname, build.dist,"static")
+            to: path.resolve(__dirname,"..", build.dist,"static")
         }])
     ],
     resolveLoader: {
